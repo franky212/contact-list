@@ -1,5 +1,4 @@
 export function addContact(contact) {
-  console.log(contact);
   return {
     type: "ADD_CONTACT",
     contact

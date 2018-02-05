@@ -15,7 +15,6 @@ class Form extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleContact = this.handleContact.bind(this);
   }
 
   handleChange(e) {
@@ -26,10 +25,13 @@ class Form extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-  }
-
-  handleContact(contact) {
-    addContact(contact);
+    this.setState({
+      name: "",
+      phone: "",
+      email: "",
+      description: ""
+    });
+    this.props.addContact(this.state);
   }
 
   render() {
@@ -37,24 +39,24 @@ class Form extends Component {
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="formControlsNameInput">
           <ControlLabel>Customer Name</ControlLabel>
-          <FormControl name="name" onChange={this.handleChange} componentClass="input" placeholder="Name"/>
+          <FormControl value={this.state.name} required name="name" onChange={this.handleChange} componentClass="input" placeholder="Name"/>
         </FormGroup>
 
         <FormGroup controlId="formControlsPhoneInput">
           <ControlLabel>Phone Number</ControlLabel>
-          <FormControl name="phone" onChange={this.handleChange} componentClass="input" placeholder="Phone Number" />
+          <FormControl value={this.state.phone} name="phone" onChange={this.handleChange} componentClass="input" placeholder="Phone Number" />
         </FormGroup>
 
         <FormGroup controlId="formControlsEmailInput">
           <ControlLabel>Email</ControlLabel>
-          <FormControl name="email" onChange={this.handleChange} componentClass="input" placeholder="Email" />
+          <FormControl value={this.state.email} required name="email" onChange={this.handleChange} componentClass="input" placeholder="Email" />
         </FormGroup>
 
         <FormGroup controlId="formControlsTextarea">
           <ControlLabel>Description</ControlLabel>
-          <FormControl name="description" onChange={this.handleChange} componentClass="textarea" placeholder="Description" />
+          <FormControl value={this.state.description} name="description" onChange={this.handleChange} componentClass="textarea" placeholder="Description" />
         </FormGroup>
-        <Button onClick={() => this.handleContact(this.state)} type="submit">Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     )
   }
